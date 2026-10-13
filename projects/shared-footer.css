@@ -1,0 +1,5 @@
+.v-footer{padding:80px 24px 60px;background:#fafcfd}
+.v-footer a{width:100%;min-height:clamp(82px,11.25vw,162px);display:flex;align-items:center;justify-content:center;gap:.35em;border:1px solid rgba(139,193,18,.34);border-radius:28px;background:linear-gradient(180deg,#edff93 0%,#e5ff76 70%,#d1f64c 100%);box-shadow:inset 0 12px 25px rgba(255,255,255,.85),inset 0 -10px 22px rgba(137,190,16,.24),0 14px 24px rgba(164,214,42,.28);color:#82b615;font-size:clamp(28px,4vw,60px);line-height:1;letter-spacing:-.045em;transition:transform .3s ease,filter .3s ease}
+.v-footer a:hover{transform:translateY(-3px);filter:saturate(1.08)}
+.v-footer a span{font-size:.62em;vertical-align:.08em}
+@media(max-width:800px){.v-footer{min-height:0;padding:48px 12px 30px;display:block}.v-footer a{border-radius:18px}}

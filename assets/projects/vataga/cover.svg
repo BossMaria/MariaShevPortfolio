@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs><clipPath id="c"><circle cx="400" cy="400" r="400"/></clipPath></defs>
+  <g clip-path="url(#c)">
+    <rect width="800" height="800" fill="#ff5138"/>
+    <g transform="rotate(-18 400 400)" fill="#171717">
+      <rect x="-180" y="-80" width="60" height="1000"/><rect x="-70" y="-80" width="28" height="1000"/><rect x="8" y="-80" width="92" height="1000"/><rect x="148" y="-80" width="42" height="1000"/><rect x="238" y="-80" width="118" height="1000"/><rect x="408" y="-80" width="34" height="1000"/><rect x="492" y="-80" width="78" height="1000"/><rect x="620" y="-80" width="24" height="1000"/><rect x="700" y="-80" width="105" height="1000"/><rect x="852" y="-80" width="40" height="1000"/>
+    </g>
+    <rect x="55" y="55" width="690" height="690" rx="345" fill="none" stroke="#fff" stroke-opacity=".72" stroke-width="4"/>
+    <text x="400" y="385" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="100" font-weight="700" letter-spacing="-7">VATAGA</text>
+    <text x="400" y="455" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="28">GENERATIVE STRIPE TOOL</text>
+  </g>
+</svg>
