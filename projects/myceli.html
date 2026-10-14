@@ -4,7 +4,7 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="myCeli — цифровой сервис, который помогает выйти из автоматизма и внимательнее проживать день.">
   <title>myCeli — Mari Shevchun</title>
-  <link rel="stylesheet" href="project.css?v=myceli-2">
+  <link rel="stylesheet" href="project.css?v=restored-current-2">
 </head>
 <body class="project-page--editorial myceli-page is-ready">
   <main>
@@ -43,9 +43,9 @@
       <figure class="case-visual"><img src="../assets/projects/myceli/figma-2026/visual-20.png" alt="myCeli — итоговая презентация"></figure>
     </section>
   </main>
-  <footer class="case-footer"><a class="case-footer__next" href="bitz.html">Следующий проект <span aria-hidden="true">▶</span></a></footer>
-  <button class="case-to-top" type="button" aria-label="Наверх"><img src="../assets/projects/secret-sauce/figma/arrow-triangle.svg" alt=""></button>
-  <script>const topButton=document.querySelector('.case-to-top');addEventListener('scroll',()=>{topButton.classList.toggle('is-visible',scrollY>700);const footer=document.querySelector('.case-footer');const gap=innerWidth<=850?16:28;topButton.style.setProperty('--footer-lift',Math.max(0,innerHeight-footer.getBoundingClientRect().top+gap)+'px')},{passive:true});topButton.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));</script>
+  <footer class="case-footer"><a class="case-footer__next" href="bitz.html">Следующий проект <span class="case-footer__arrow" aria-hidden="true"></span></a></footer>
+  <button class="case-to-top" type="button" aria-label="Наверх"><img src="../assets/ui/to-top-green.svg" alt=""></button>
+  <script src="case-to-top.js?v=restored-current-2"></script>
   <script src="../typography.js"></script>
 </body>
 </html>

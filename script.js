@@ -16,6 +16,7 @@ let quietSince = 0;
 let introRevealed = false;
 let lastLogoHit = 0;
 const HOME_STATE_KEY = 'shev-portfolio-home-state-brand-v2';
+const tagPalettes={VATAGA:['#edfe8c','#88b718'],myCeli:['#edfe8c','#88b718'],'БИТЗ':['#ffdeef','#ff62b9'],'Secret Sauce':['#ffe47b','#ff9818'],'Secret Garden':['#ffe47b','#ff9818']};
 
 const balls = ballElements.map((el, i) => ({
   el, x: 0, y: -400 - i * 145, vx: (i - 2) * 14, vy: 0,
@@ -248,15 +249,16 @@ function openProject(ball) {
   if (drag) return;
   enableSound();
   saveHomeState();
-  window.location.href = ball.el.href;
+  if(reducedMotion){window.location.href=ball.el.href;return}document.body.classList.add('is-page-leaving');setTimeout(()=>{window.location.href=ball.el.href},220);
 }
 
 balls.forEach(ball => {
   ball.el.addEventListener('pointerenter', () => {
     if (drag) return;
-    projectCursor.querySelector('strong').textContent = ball.el.dataset.project;
+    if(!ball.el.classList.contains('project-ball')){projectCursor.classList.remove('is-visible');return}const projectName=ball.el.dataset.project;const palette=tagPalettes[projectName]||['#edfe8c','#88b718'];projectCursor.style.setProperty('--tag-color',palette[0]);projectCursor.style.setProperty('--tag-ink',palette[1]);projectCursor.querySelector('strong').textContent = projectName;
     projectCursor.querySelector('i').textContent = ball.el.dataset.year;
     projectCursor.querySelector('b').textContent = ball.el.dataset.category;
+    projectCursor.style.setProperty('--tag-a-x',`${Math.round(Math.random()*34)}px`);projectCursor.style.setProperty('--tag-a-y',`${78+Math.round(Math.random()*25)}px`);projectCursor.style.setProperty('--tag-a-r',`${2+Math.random()*7}deg`);projectCursor.style.setProperty('--tag-b-x',`${62+Math.round(Math.random()*62)}px`);projectCursor.style.setProperty('--tag-b-y',`${Math.round(Math.random()*28)}px`);projectCursor.style.setProperty('--tag-b-r',`${-7+Math.random()*6}deg`);
     projectCursor.classList.add('is-visible');
   });
   ball.el.addEventListener('pointerleave', () => projectCursor.classList.remove('is-visible'));
@@ -286,6 +288,7 @@ balls.forEach(ball => {
   });
 
   ball.el.addEventListener('pointermove', event => {
+    if(ball.el.classList.contains('project-ball')&&(!drag||drag.ball!==ball)){const r=ball.el.getBoundingClientRect(),lx=(event.clientX-r.left)/r.width,ly=(event.clientY-r.top)/r.height,nx=Math.max(-1,Math.min(1,lx*2-1)),ny=Math.max(-1,Math.min(1,ly*2-1));ball.el.style.setProperty('--parallax-x',`${-nx*ball.r*.075}px`);ball.el.style.setProperty('--parallax-y',`${-ny*ball.r*.075}px`)}
     if (!drag || drag.ball !== ball || drag.pointerId !== event.pointerId) return;
     const rect = playground.getBoundingClientRect();
     const now = performance.now();
@@ -299,6 +302,7 @@ balls.forEach(ball => {
     drag.moved ||= Math.hypot(event.clientX - drag.lastX, event.clientY - drag.lastY) > 2;
     drag.lastX = event.clientX; drag.lastY = event.clientY; drag.lastTime = now;
   });
+  ball.el.addEventListener('pointerleave',()=>{if(ball.el.classList.contains('project-ball')){ball.el.style.setProperty('--parallax-x','0px');ball.el.style.setProperty('--parallax-y','0px')}});
 
   const release = event => {
     if (!drag || drag.ball !== ball || drag.pointerId !== event.pointerId) return;
@@ -322,12 +326,12 @@ balls.forEach(ball => {
   });
 });
 window.addEventListener('pointermove', event => {
-  const cursorX = Math.max(8, Math.min(window.innerWidth - 248, event.clientX + 18));
-  const cursorY = Math.max(8, Math.min(window.innerHeight - 82, event.clientY + 18));
+  const cursorX = Math.max(8, Math.min(window.innerWidth - 370, event.clientX + 18));
+  const cursorY = Math.max(8, Math.min(window.innerHeight - 180, event.clientY + 18));
   projectCursor.style.setProperty('--cursor-x', `${cursorX}px`);
   projectCursor.style.setProperty('--cursor-y', `${cursorY}px`);
 });
-window.addEventListener('pageshow', event => { if (event.persisted) restoreHomeState(); });
+window.addEventListener('pageshow',event=>{document.body.classList.remove('is-page-leaving');if(event.persisted)restoreHomeState()});
 window.addEventListener('pointerdown', enableSound, { once: true });
 window.addEventListener('click', enableSound, { once: true });
 window.addEventListener('touchstart', enableSound, { once: true, passive: true });
