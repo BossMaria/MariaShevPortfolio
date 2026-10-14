@@ -154,9 +154,16 @@ img { max-width:100%; }
 .myceli-page .case-overview{margin-top:120px}
 .myceli-page .case-introduction{max-width:714px}
 .myceli-page .case-introduction p{font-size:36px;line-height:1;letter-spacing:-1.12px}
-.myceli-visuals{padding-top:60px;padding-bottom:60px;gap:40px}
-.myceli-visuals .case-visual{max-width:1320px}
-@media(max-width:850px){.myceli-cover{height:62vw;min-height:300px;border-radius:0 0 28px 28px}.myceli-page .case-head{width:calc(100% - 40px);padding-top:40px;padding-bottom:64px}.myceli-back{margin-bottom:20px}.myceli-page .case-head>h1{font-size:52px}.myceli-page .case-overview{margin-top:64px}.myceli-page .case-introduction p{font-size:28px}.myceli-visuals{padding:40px 0;gap:40px}}
+.myceli-visuals{padding:60px max(24px,calc((100vw - 1240px)/2));gap:40px}
+.myceli-visuals .case-visual{max-width:1240px;border-radius:80px}
+.myceli-visual{aspect-ratio:620/349}
+.myceli-visual:nth-child(1){aspect-ratio:1240/409}
+.myceli-visual:nth-child(4){aspect-ratio:310/83}
+.myceli-visual:nth-child(9){aspect-ratio:155/108}
+.myceli-visual:nth-child(19){aspect-ratio:1240/243}
+.myceli-visual:nth-child(20){aspect-ratio:1240/651}
+.myceli-visuals .case-visual img{width:100%;height:100%;object-fit:cover}
+@media(max-width:850px){.myceli-cover{height:62vw;min-height:300px;border-radius:0 0 28px 28px}.myceli-page .case-head{width:calc(100% - 40px);padding-top:40px;padding-bottom:64px}.myceli-back{margin-bottom:20px}.myceli-page .case-head>h1{font-size:52px}.myceli-page .case-overview{margin-top:64px}.myceli-page .case-introduction p{font-size:28px}.myceli-visuals{padding:40px 12px;gap:24px}.myceli-visuals .case-visual{border-radius:24px}}
 
 /* Restored current case transitions and controls */
 body{transition:opacity .28s ease}body.project-page--editorial{animation:case-page-enter .58s cubic-bezier(.22,.82,.25,1) both}body.is-page-leaving{opacity:0}.project-page--editorial main>section:first-child{animation:case-cover-enter .72s .04s cubic-bezier(.18,.8,.22,1) both}.project-page--editorial .case-head{animation:case-copy-enter .62s .14s cubic-bezier(.18,.8,.22,1) both}@keyframes case-page-enter{from{opacity:0}to{opacity:1}}@keyframes case-cover-enter{from{opacity:0;transform:translateY(14px) scale(.997)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes case-copy-enter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -168,3 +175,7 @@ body{transition:opacity .28s ease}body.project-page--editorial{animation:case-pa
   .case-footer{padding:48px 12px 30px}
   .case-footer__next{border-radius:18px}
 }
+
+/* Keep the artwork clean after clicking while retaining keyboard focus feedback. */
+.case-to-top:focus{outline:none}
+.case-to-top:focus-visible{outline:2px solid currentColor;outline-offset:3px}
