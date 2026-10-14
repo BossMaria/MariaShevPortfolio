@@ -179,3 +179,64 @@ body{transition:opacity .28s ease}body.project-page--editorial{animation:case-pa
 /* Keep the artwork clean after clicking while retaining keyboard focus feedback. */
 .case-to-top:focus{outline:none}
 .case-to-top:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+/* Shared case navigation sizing and optical alignment. */
+.garden-back,
+.bitz-back,
+.sauce-back,
+.myceli-back,
+.vataga-back{
+  box-sizing:border-box;
+  min-height:52px;
+  padding:0 20px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  line-height:1;
+}
+.garden-back span,
+.bitz-back span,
+.sauce-back span,
+.myceli-back span,
+.vataga-back span{
+  width:10px;
+  display:grid;
+  place-items:center;
+  flex:0 0 10px;
+  font-size:10px;
+  line-height:1;
+}
+.case-footer__next{
+  box-sizing:border-box;
+  height:164px;
+  min-height:164px;
+  padding:0 32px;
+  align-items:center;
+  justify-content:center;
+  gap:.28em;
+  line-height:1;
+  text-align:center;
+}
+.case-footer__next .case-footer__arrow{
+  position:static;
+  top:auto;
+  width:.46em;
+  height:.42em;
+  aspect-ratio:auto;
+  align-self:auto;
+  font-size:1em;
+  background:currentColor;
+  -webkit-mask:url("../assets/projects/secret-sauce/figma/arrow-triangle.svg") center/100% 100% no-repeat;
+  mask:url("../assets/projects/secret-sauce/figma/arrow-triangle.svg") center/100% 100% no-repeat;
+  transform:rotate(90deg);
+  transform-origin:center;
+}
+@media(max-width:850px){
+  .garden-back,
+  .bitz-back,
+  .sauce-back,
+  .myceli-back,
+  .vataga-back{min-height:52px;padding:0 20px}
+  .case-footer__next{height:120px;min-height:120px;padding:0 20px;font-size:clamp(30px,8vw,44px);border-radius:22px}
+  .case-footer__next .case-footer__arrow{width:.46em;height:.42em}
+}
