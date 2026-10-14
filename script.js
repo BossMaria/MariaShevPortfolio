@@ -25,14 +25,16 @@ const balls = ballElements.map((el, i) => ({
 }));
 
 function measure(reset = false) {
+  const previous = bounds;
   const area = playground.getBoundingClientRect();
   const footerTop = footer.getBoundingClientRect().top - area.top;
+  const edge = Math.max(10, Math.min(28, area.width * .012));
   bounds = {
     width: area.width,
     height: area.height,
     floor: Math.max(200, footerTop - 10),
-    left: 0,
-    right: area.width,
+    left: edge,
+    right: area.width - edge,
   };
   balls.forEach((ball, i) => {
     ball.r = ball.el.offsetWidth / 2;
@@ -46,10 +48,23 @@ function measure(reset = false) {
       ball.vy = reducedMotion ? 0 : 8 + Math.random() * 36;
       ball.angle = (Math.random() - .5) * 18;
     } else {
+      const oldUsableWidth = Math.max(1, previous.right - previous.left);
+      const newUsableWidth = Math.max(1, bounds.right - bounds.left);
+      ball.x = bounds.left + (ball.x - previous.left) * (newUsableWidth / oldUsableWidth);
+      ball.y *= bounds.floor / Math.max(1, previous.floor);
       ball.x = Math.min(bounds.right - ball.r, Math.max(bounds.left + ball.r, ball.x));
-      ball.y = Math.min(bounds.floor - ball.r, ball.y);
+      ball.y = Math.max(ball.r, Math.min(bounds.floor - ball.r, ball.y));
     }
   });
+  if (!reset && hasLaunched) {
+    for (let pass = 0; pass < 12; pass++) {
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) resolveCollision(balls[i], balls[j]);
+        balls[i].x = Math.max(bounds.left + balls[i].r, Math.min(bounds.right - balls[i].r, balls[i].x));
+        balls[i].y = Math.max(balls[i].r, Math.min(bounds.floor - balls[i].r, balls[i].y));
+      }
+    }
+  }
   hasLaunched = true;
 }
 
@@ -337,7 +352,11 @@ window.addEventListener('click', enableSound, { once: true });
 window.addEventListener('touchstart', enableSound, { once: true, passive: true });
 window.addEventListener('keydown', enableSound, { once: true });
 enableSound();
-window.addEventListener('resize', () => measure(false));
+let resizeFrame = 0;
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(resizeFrame);
+  resizeFrame = requestAnimationFrame(() => measure(false));
+});
 measure(true);
 const restoredHome = restoreHomeState();
 if (reducedMotion && !restoredHome) {
